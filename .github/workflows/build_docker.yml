@@ -19,7 +19,7 @@ jobs:
       - name: Checkout Spoolman fork
         uses: actions/checkout@v4
         with:
-          repository: yourusername/spoolman  # Replace with your fork's repo
+          repository: chof747/spoolman  # Replace with your fork's repo
           ref: master
 
       - name: Set up Node.js
