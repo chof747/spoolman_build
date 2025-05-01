@@ -1,4 +1,4 @@
-name: Build and push Docker Image
+  name: Build and push Docker Image
 
 on:
   schedule:
@@ -48,9 +48,17 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build and push Docker image
+      - name: Set up QEMU for cross-platform builds
+        uses: docker/setup-qemu-action@v3
+      
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      
+      - name: Build and push Docker image (arm64)
         uses: docker/build-push-action@v6
         with:
           context: .
           push: true
-          tags: ${{ env.GHCR_IMAGE }}:latest
+          platforms: linux/arm64
+          tags: ${{ env.GHCR_IMAGE }}:weekly
+
